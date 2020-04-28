@@ -3,19 +3,21 @@ var body = document.body;
 
 //Set the main container to a variable
 var mainEl = document.querySelector(".card-body");
-var ques = document.querySelector(".question");
+var question = document.querySelector(".question");
 var answerEl = document.querySelector(".list-group list-group-flush");
+var result = document.getElementById("result");
+var answer = document.querySelector(".answer");
 var choiceA = document.getElementById("button-A");
 var choiceB = document.getElementById("button-B");
 var choiceC = document.getElementById("button-C");
 var choiceD = document.getElementById("button-D");
-var answer = document.getElementById("answer");
+var correctAnswer = document.querySelector(".list-group list-group-flush");
 
 //All the elements//
 var time = document.querySelector(".time");
 var seconds = document.getElementById("seconds");
 
-var timeLeft = 100;
+var timeLeft = 30;
 
 function setTime() {
     var timerRun = setInterval(function() {
@@ -27,7 +29,6 @@ function setTime() {
             sendMessage();
         }
     }, 1000);
-    console.log(setTime);
 }
 
 function sendMessage() {
@@ -35,6 +36,7 @@ function sendMessage() {
 }
 
 setTime();
+
 
 //Set all my questions as objets inside and array
 
@@ -45,7 +47,7 @@ var allQuestions = [
         choiceB: "b.360",
         choiceC: "c.530",
         choiceD: "d.250",
-        correct: choiceA,
+        answer: "a"
     },
    
     {
@@ -54,7 +56,7 @@ var allQuestions = [
        choiceB: "b.50 millions of years",
        choiceC: "c.450 millions of years",
        choiceD: "d.5 millions of years",
-       correct: choiceC,
+       answer: "c"
    },
    
    {
@@ -63,7 +65,7 @@ var allQuestions = [
        choiceB: "b.Whale Shark",
        choiceC: "c.Great White Shark",
        choiceD: "d.Tigger Shark",
-       correct: choiceB,
+       answer: "b"
    },
    
    {
@@ -72,7 +74,7 @@ var allQuestions = [
        choiceB: "b. Bull Shark",
        choiceC: "c. Mako Shark",
        choiceD: "d. Angel Shark",
-       correct: choiceB,
+       answer: "b"
    },
    
    {
@@ -81,7 +83,7 @@ var allQuestions = [
        choiceB: "b. Basking Shark",
        choiceC: "c. Blue Shark",
        choiceD: "d. Great White Shark",
-       correct: choiceD,
+       answer: "d"
    },
        
    {
@@ -90,7 +92,7 @@ var allQuestions = [
        choiceB: "b. 6-10 mts.",
        choiceC: "c. 12-15 mts.",
        choiceD: "d. 15-18 mts.",
-       correct: choiceD,
+       answer: "d"
    },
    
    {
@@ -98,8 +100,8 @@ var allQuestions = [
        choiceA: "a. 100-150 years",
        choiceB: "b. 20-40 years",
        choiceC: "c. 70-100 years",
-       coiceD: "d. 10-20 years",
-       correct: choiceC,
+       choiceD: "d. 10-20 years",
+       answer: "c"
    },
    
    {
@@ -108,7 +110,7 @@ var allQuestions = [
        choiceB: "b. What give sharks the super power of smelling blood kms away",
        choiceC: "c. Special sensing organs that help sharks and other species to sense electric fields in the water.",
        choiceD: "d. An alternative name to sharks dorsal fin ",
-       correct: choiceC,
+       answer: "c"
        
    },
    
@@ -118,7 +120,7 @@ var allQuestions = [
        choiceB: "b. 250",
        choiceC: "c. 500",
        choiceD: "d. 100",
-       correct: choiceA,
+       answer: "a"
    },
    
    {
@@ -127,37 +129,91 @@ var allQuestions = [
        choiceB: "b. Not at all. Humans are such much more dangerous for sharks",
        choiceC: "As dangerous as Coronavirus ",
        choiceD: "Sure, they are as scarier as my ex",
-       correct: choiceB,
+       answer: "b"
    }, 
    ]
 
+   console.log(allQuestions);
 
-//Set text content 
 
-ques.textContent = allQuestions[i].question;
-choiceA.textContent = allQuestions[i].choiceA;
-choiceB.textContent = allQuestions[i].choiceB;
-choiceC.textContent = allQuestions[i].choiceC;
-choiceD.textContent = allQuestions[i].choiceD;
-answer.textContent = allQuestions[i].correct;
+//questions variables//
 
-//Apend elements//
+var lastQuestion = allQuestions.length -1;
+console.log(lastQuestion);
+var runningIndexQ = 0;
 
-mainEl.appendChild(ques);
-mainEl.appendChild(answerEl);
+//function to run the question
 
-//questions loop //
+function renderQuestion(){
+    var q = allQuestions[runningIndexQ];
+    question.innerHTML = "<p>"+ q.question + "</p>";
+    choiceA.innerHTML = q.choiceA; 
+    choiceB.innerHTML = q.choiceB; 
+    choiceC.innerHTML = q.choiceC; 
+    choiceD.innerHTML = q.choiceD;
+    answer.innerHTML = q.answer; 
 
-for ( var i=0; i < allQuestions.length; i++){
-    var response = addEventListener("click", function(){
-        
-    })
+} 
+renderQuestion();
+mainEl.style.display = "block";
+
+//function to run questions//
+
+function userAnswer (answer) {
+    if(runningIndexQ < lastQuestion){
+        runningIndexQ++;
+        renderQuestion()
+    }
 }
+
+//correct answer function
+function correctAnswer () {
+    document.querySelector(answer).innerHTML = "CORRECT!";
+}
+
+//wrong answer function
+function wrongAnswer () {
+    document.querySelector(answer).innerHTML = "WRONG!";
+}
+
+//Set a variable for user's answer
+
+choiceA.addEventListener("click", function(event){
+    console.log(runningIndexQ);
+    dataIndex = choiceA.getAttribute("data-index", allQuestions[runningIndexQ]);
+    userAnswer(dataIndex);
+});
+
+choiceB.addEventListener("click", function(event){
+    console.log(runningIndexQ);
+    dataIndex = choiceB.getAttribute("data-index", allQuestions[runningIndexQ]);
+    userAnswer(dataIndex);
+
+})
+choiceC.addEventListener("click", function(event){
+    console.log(runningIndexQ);
+    dataIndex = choiceC.getAttribute("data-index", allQuestions[runningIndexQ]);
+    userAnswer(dataIndex);
+
+})
+choiceD.addEventListener("click", function(event){
+    console.log(runningIndexQ);
+    dataIndex = choiceD.getAttribute("data-index", allQuestions[runningIndexQ]);
+    userAnswer(dataIndex);
+
+})
+
+
+
+
+//Answers//
+
+
+
    
 //Answers Text Content//
 
-correct.textContent = "You are awesome";
-incorrect.textContent = "Nice try :)";
+
 
 
 

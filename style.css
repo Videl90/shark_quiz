@@ -63,13 +63,30 @@
 }
 
 .card-img-top {
-    padding: 15px 0px 10px 15px;;
+    padding: 15px 0px 10px 15px;
 }
 
 .time {
     text-align: center;
     font-size: 24px;
 }
+
+/*Input Styles*/
+
+#users-input {
+    width: 100%;
+    background-color: #ffffff;
+    font-family: 'PT Sans Narrow';
+}
+
+.form-group {
+    padding: 15px 50px;
+}
+
+.btn-dark {
+    margin: 20px 5px;
+}
+
 
 
 

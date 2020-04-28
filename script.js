@@ -1,7 +1,7 @@
 //Set the body to a variable
 var body = document.body;
 
-//Set the main container to a variable
+//Set the important variables
 var mainEl = document.querySelector(".card-body");
 var question = document.querySelector(".question");
 var answerEl = document.querySelector(".list-group list-group-flush");
@@ -11,7 +11,12 @@ var choiceA = document.getElementById("button-A");
 var choiceB = document.getElementById("button-B");
 var choiceC = document.getElementById("button-C");
 var choiceD = document.getElementById("button-D");
-var correctAnswer = document.querySelector(".list-group list-group-flush");
+var right = document.querySelector(".list-group list-group-flush");
+var wrong = document.querySelector(".list-group list-group-flush");
+
+
+//input.style.display = "none";
+
 
 //All the elements//
 var time = document.querySelector(".time");
@@ -47,7 +52,7 @@ var allQuestions = [
         choiceB: "b.360",
         choiceC: "c.530",
         choiceD: "d.250",
-        answer: "a"
+        answer: 1
     },
    
     {
@@ -56,7 +61,7 @@ var allQuestions = [
        choiceB: "b.50 millions of years",
        choiceC: "c.450 millions of years",
        choiceD: "d.5 millions of years",
-       answer: "c"
+       answer: 3
    },
    
    {
@@ -65,7 +70,7 @@ var allQuestions = [
        choiceB: "b.Whale Shark",
        choiceC: "c.Great White Shark",
        choiceD: "d.Tigger Shark",
-       answer: "b"
+       answer: 2
    },
    
    {
@@ -74,7 +79,7 @@ var allQuestions = [
        choiceB: "b. Bull Shark",
        choiceC: "c. Mako Shark",
        choiceD: "d. Angel Shark",
-       answer: "b"
+       answer: 2
    },
    
    {
@@ -83,7 +88,7 @@ var allQuestions = [
        choiceB: "b. Basking Shark",
        choiceC: "c. Blue Shark",
        choiceD: "d. Great White Shark",
-       answer: "d"
+       answer: 4
    },
        
    {
@@ -92,7 +97,7 @@ var allQuestions = [
        choiceB: "b. 6-10 mts.",
        choiceC: "c. 12-15 mts.",
        choiceD: "d. 15-18 mts.",
-       answer: "d"
+       answer: 4
    },
    
    {
@@ -101,7 +106,7 @@ var allQuestions = [
        choiceB: "b. 20-40 years",
        choiceC: "c. 70-100 years",
        choiceD: "d. 10-20 years",
-       answer: "c"
+       answer: 3
    },
    
    {
@@ -110,7 +115,7 @@ var allQuestions = [
        choiceB: "b. What give sharks the super power of smelling blood kms away",
        choiceC: "c. Special sensing organs that help sharks and other species to sense electric fields in the water.",
        choiceD: "d. An alternative name to sharks dorsal fin ",
-       answer: "c"
+       answer: 3
        
    },
    
@@ -120,7 +125,7 @@ var allQuestions = [
        choiceB: "b. 250",
        choiceC: "c. 500",
        choiceD: "d. 100",
-       answer: "a"
+       answer: 1
    },
    
    {
@@ -129,7 +134,7 @@ var allQuestions = [
        choiceB: "b. Not at all. Humans are such much more dangerous for sharks",
        choiceC: "As dangerous as Coronavirus ",
        choiceD: "Sure, they are as scarier as my ex",
-       answer: "b"
+       answer: 2
    }, 
    ]
 
@@ -141,6 +146,8 @@ var allQuestions = [
 var lastQuestion = allQuestions.length -1;
 console.log(lastQuestion);
 var runningIndexQ = 0;
+var dataIndex = 0;
+var finalScore = 0;
 
 //function to run the question
 
@@ -156,19 +163,31 @@ function renderQuestion(){
 } 
 renderQuestion();
 mainEl.style.display = "block";
+result.style.display = "none";
+
 
 //function to run questions//
 
-function userAnswer (answer) {
+function userAnswer (choice) {
+    if (choice == allQuestions[runningIndexQ].right){
+        timeLeft + 5;
+        correctAnswer()
+    } else{
+        
+        timeLeft - 5;
+    }
+    //this makes the questions run
     if(runningIndexQ < lastQuestion){
         runningIndexQ++;
         renderQuestion()
-    }
+    } 
 }
 
+
 //correct answer function
-function correctAnswer () {
-    document.querySelector(answer).innerHTML = "CORRECT!";
+function correctAnswer() {
+    console.log("COOOORRECT!")
+    right.textContent = "RIIIIGHT!"
 }
 
 //wrong answer function
@@ -203,10 +222,82 @@ choiceD.addEventListener("click", function(event){
 
 })
 
+//Input Variables
+
+var nameInput = document.getElementById("users-input");
+var userName = document.getElementById("users-name");
+var yourResult = document.querySelector(".final");
+var submitScore = document.querySelector(".submitScore");
+var clearScore = document.querySelector(".clearScore");
+var tryAgain = document.querySelector(".tryAgain");
+
+var names = [];
+
+function renderNames() {
+    userName.innerHTML = "";
+
+    for (var i = 0; i < names.length; i++) {
+        var names = names[i];
+
+        var li = document.createElement("li");
+        li.textContent = names;
+        li.setAttribute("fata-index", i);
+
+        userName.appendChild(li);
+
+    }
+}
+
+renderNames();
+
+function storeNames() {
+    localStorage.setItem("names", JSON.stringify(names));
+  }
+
+  
+
+nameInput.addEventListener("submit", function(event){
+    event.preventDefault();
+
+    nameText = nameInput.value.trim();
+
+    if (nameText === ""){
+        return;
+    }
+
+    names.push(nameText);
+    nameInput.value = "";
+
+    storeNames();
+    renderNames();
+
+})
 
 
 
-//Answers//
+
+/*Input Variables//
+function displayName(type, name) {
+    userName.textContent = name;
+    userName.setAttribute("class", type);
+}
+
+submitScore.addEventListener("click", function(event){
+    event.preventDefault();
+
+    userName = document.querySelector("#users-name").value;
+    
+    if (name === "") {
+        displayMessage("error", "Must enter a name");
+    } else {
+        displayName;
+    }
+
+})*/
+
+
+
+
 
 
 

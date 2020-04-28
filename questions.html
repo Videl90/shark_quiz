@@ -21,14 +21,29 @@
         <p class="question">Question</p>
       </div>
       <ul class="list-group list-group-flush">
-        <button id="button-A" class="btn btn-secondary btn-lg btn-block" data-index="a">A</button>
-        <button id="button-B" class="btn btn-secondary btn-lg btn-block" data-index="b">B</button>
-        <button id="button-C" class="btn btn-secondary btn-lg btn-block" data-index="c">C</button>
-        <button id="button-D" class="btn btn-secondary btn-lg btn-block" data-index="d">D</button>
+        <button id="button-A" class="btn btn-secondary btn-lg btn-block" data-index="1">A</button>
+        <button id="button-B" class="btn btn-secondary btn-lg btn-block" data-index="2">B</button>
+        <button id="button-C" class="btn btn-secondary btn-lg btn-block" data-index="3">C</button>
+        <button id="button-D" class="btn btn-secondary btn-lg btn-block" data-index="4">D</button>
       </ul>
       <div id="result">
         <p class="answer" >Here goes the answer</p>
       </div>
+    </div>
+
+    <div id ="users-input">
+      <form>
+        <div class="form-group">
+          <label for="formGroupExampleInput" style="font-weight: bolder; color: #606a8c">You are a crack!!</label>
+          <label for="formGroupExampleInput" class="final" style="font-weight: bolder; color: #606a8c">Final Score:</label>
+          <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter your name">
+          <button type="button" id="submitScore" class="btn btn-dark">Submit</button>
+          <button type="button" id="clearScore" class="btn btn-dark">Clear Score</button>
+          <button type="button" id = "tryAgain" class="btn btn-dark">Try Again</button>
+          <p class= "users-name" style="font-weight: bolder; color: #606a8c">""</p>
+        </div>
+        
+      </form>
     </div>
 
   </div>

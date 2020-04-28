@@ -4,15 +4,12 @@ var body = document.body;
 //Set the important variables
 var mainEl = document.querySelector(".card-body");
 var question = document.querySelector(".question");
-var answerEl = document.querySelector(".list-group list-group-flush");
 var result = document.getElementById("result");
 var answer = document.querySelector(".answer");
 var choiceA = document.getElementById("button-A");
 var choiceB = document.getElementById("button-B");
 var choiceC = document.getElementById("button-C");
 var choiceD = document.getElementById("button-D");
-var right = document.querySelector(".list-group list-group-flush");
-var wrong = document.querySelector(".list-group list-group-flush");
 
 
 //input.style.display = "none";
@@ -158,7 +155,7 @@ function renderQuestion(){
     choiceB.innerHTML = q.choiceB; 
     choiceC.innerHTML = q.choiceC; 
     choiceD.innerHTML = q.choiceD;
-    answer.innerHTML = q.answer; 
+    //answer.innerHTML = q.answer; 
 
 } 
 renderQuestion();
@@ -169,30 +166,34 @@ result.style.display = "none";
 //function to run questions//
 
 function userAnswer (choice) {
-    if (choice == allQuestions[runningIndexQ].right){
-        timeLeft + 5;
+    console.log(choice, allQuestions[runningIndexQ].answer);
+    if (choice == allQuestions[runningIndexQ].answer){
+        timeLeft = timeLeft + 5;
         correctAnswer()
     } else{
         
-        timeLeft - 5;
+        timeLeft = timeLeft - 5;
+        wrongAnswer();
     }
     //this makes the questions run
     if(runningIndexQ < lastQuestion){
         runningIndexQ++;
         renderQuestion()
-    } 
+    }
+    result.style.display = "block"; 
 }
 
 
 //correct answer function
 function correctAnswer() {
     console.log("COOOORRECT!")
-    right.textContent = "RIIIIGHT!"
+    answer.textContent = "RIIIIGHT!"
 }
 
 //wrong answer function
 function wrongAnswer () {
-    document.querySelector(answer).innerHTML = "WRONG!";
+    console.log("INCORRECT!")
+    answer.textContent = "WRONG!";
 }
 
 //Set a variable for user's answer

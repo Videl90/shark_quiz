@@ -193,7 +193,7 @@ function correctAnswer() {
 //wrong answer function
 function wrongAnswer () {
     console.log("INCORRECT!")
-    answer.textContent = "WRONG!";
+    answer.textContent = "WRONG!!!";
     setTimeout(function(){
         answer.textContent = ""
     }, 1500);
@@ -242,57 +242,28 @@ choiceD.addEventListener("click", function(event){
 
 //Input Variables
 
-var nameInput = document.getElementById("users-input");
-var userName = document.querySelector(".highscores");
-var yourResult = document.querySelector(".final");
-var submitScore = document.querySelector(".submitScore");
-var clearScore = document.querySelector(".clearScore");
-var tryAgain = document.querySelector(".tryAgain");
-var finalScore = document.querySelector(".final");
-var table = document.querySelector(".table");
-var scoreNbr = document.querySelector(".score");
+var nameInput = document.getElementById("#enterUser");
+var nameForm = document.getElementById("users-input"); //esta variable es para aparecer o desaparecer el input
+var userName = document.querySelector(".highscores");//corresponde al nombre del usuario en las 3 filas
+//Este es el input donde el usuario escribe su nombre
+var submitScore = document.querySelector("#submitScore");//botón para imprimir el nombre en la tabla
+var tryAgain = document.querySelector(".tryAgain");//botón para volver a hacer el test
+var table = document.querySelector(".table");//tabla de resultados
+var scoreNumber = document.querySelector(".score");//esto es el score de cada usuario
 
+renderLastRegistered()
 
-var names = [];
-
-function renderNames() {
-    userName.innerHTML = "";
-
-    for (var i = 0; i < names.length; i++) {
-        var names = names[i];
-
-        var li = document.createElement("li");
-        li.textContent = names;
-        li.setAttribute("fata-index", i);
-
-        userName.appendChild(li);
-
-    }
+function renderLastRegistered (){
+    userName.textContent = localStorage.getItem("enterUser");
 }
 
-renderNames();
-
-function storeNames() {
-    localStorage.setItem("names", JSON.stringify(names));
-  }
-
-  
-
-nameInput.addEventListener("submit", function(event){
+submitScore.addEventListener("click", function(event){
     event.preventDefault();
 
-    nameText = nameInput.value.trim();
+    var finalScore = document.querySelector("#enterUser").value;
 
-    if (nameText === ""){
-        return;
-    }
-
-    names.push(nameText);
-    nameInput.value = "";
-
-    storeNames();
-    renderNames();
-
+    localStorage.setItem("enterUser", finalScore);
+    renderLastRegistered()
 })
 
 

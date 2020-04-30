@@ -1,5 +1,32 @@
 Shark Quiz
 
+1. Create an initial HTML with an introduction text, and a call to action to start the quiz.
+2. Once clicked, it will redirect to another HTML, which will contain the necessary placeholders:
+	
+	- Seconds Left
+	- Question
+	- 4 multiple options  
+	- The correct or incorrect text will show up.
+
+3. Add some styles in my CSS.
+4. Create and JS script. First steps is to create all my variables and arrays. Each variable will contain a set of objets (which are the possible answers for the question).
+5. Create the text content 
+6. Create all the functions. First I have to make all the first question text-contents to appear in their place holders.
+   I need to add onclick events for the correct or incorrect text to appear. (conditionals).
+	
+
+
+
+
+
+
+
+
+
+
+
+
+QUESTIONS:
 1. How many species of sharks exist?
 
 a. 465

@@ -10,9 +10,7 @@ var choiceA = document.getElementById("button-A");
 var choiceB = document.getElementById("button-B");
 var choiceC = document.getElementById("button-C");
 var choiceD = document.getElementById("button-D");
-
-
-//input.style.display = "none";
+var endQuiz = false;
 
 
 //All the elements//
@@ -26,7 +24,7 @@ function setTime() {
         timeLeft--;
         seconds.textContent = timeLeft + " seconds!";
         
-        if(timeLeft === 0) {
+        if(timeLeft <= 0) {
             clearInterval(timerRun);
             sendMessage();
         }
@@ -129,8 +127,8 @@ var allQuestions = [
        question: "10. Are sharks dangerous to humans?",
        choiceA: "a. Sure. They eat humans.",
        choiceB: "b. Not at all. Humans are such much more dangerous for sharks",
-       choiceC: "As dangerous as Coronavirus ",
-       choiceD: "Sure, they are as scarier as my ex",
+       choiceC: "c. As dangerous as Coronavirus ",
+       choiceD: "d. Sure, they are as scarier as my ex",
        answer: 2
    }, 
    ]
@@ -163,7 +161,7 @@ mainEl.style.display = "block";
 result.style.display = "none";
 
 
-//function to run questions//
+//function to add 5 seconds to score if the answer is correct
 
 function userAnswer (choice) {
     console.log(choice, allQuestions[runningIndexQ].answer);
@@ -181,7 +179,9 @@ function userAnswer (choice) {
         renderQuestion()
     }
     result.style.display = "block"; 
+
 }
+
 
 
 //correct answer function
@@ -194,6 +194,19 @@ function correctAnswer() {
 function wrongAnswer () {
     console.log("INCORRECT!")
     answer.textContent = "WRONG!";
+    setTimeout(function(){
+        answer.textContent = ""
+    }, 1500);
+}
+
+//Final Score
+
+function finalScore() {
+    endQuiz = true;
+    setTime(endQuiz);
+    mainEl.style.display = "none";
+    question.textContent = "FINISHED!";
+    seconds.textContent = secondsLeft;
 }
 
 //Set a variable for user's answer
@@ -223,14 +236,22 @@ choiceD.addEventListener("click", function(event){
 
 })
 
+
+
+
+
 //Input Variables
 
 var nameInput = document.getElementById("users-input");
-var userName = document.getElementById("users-name");
+var userName = document.querySelector(".highscores");
 var yourResult = document.querySelector(".final");
 var submitScore = document.querySelector(".submitScore");
 var clearScore = document.querySelector(".clearScore");
 var tryAgain = document.querySelector(".tryAgain");
+var finalScore = document.querySelector(".final");
+var table = document.querySelector(".table");
+var scoreNbr = document.querySelector(".score");
+
 
 var names = [];
 
@@ -276,34 +297,6 @@ nameInput.addEventListener("submit", function(event){
 
 
 
-
-/*Input Variables//
-function displayName(type, name) {
-    userName.textContent = name;
-    userName.setAttribute("class", type);
-}
-
-submitScore.addEventListener("click", function(event){
-    event.preventDefault();
-
-    userName = document.querySelector("#users-name").value;
-    
-    if (name === "") {
-        displayMessage("error", "Must enter a name");
-    } else {
-        displayName;
-    }
-
-})*/
-
-
-
-
-
-
-
-   
-//Answers Text Content//
 
 
 

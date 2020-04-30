@@ -14,7 +14,7 @@
 }
 
 .name {
-    color: #ffffff;
+    color: #e0b1d0;
     text-align: center;
     font-size: 60px;
     margin-top:15%;
@@ -87,6 +87,21 @@
     margin: 20px 5px;
 }
 
+.table {
+    margin-top: 15px;
+}
+
+a {
+ color:#ffffff;   
+}
+
+a:hover {
+    color:#e0b1d0;
+}
+
+.answer {
+    color: #5ee308;
+}
 
 
 

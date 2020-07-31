@@ -12,11 +12,9 @@ var choiceC = document.getElementById("button-C");
 var choiceD = document.getElementById("button-D");
 var endQuiz = false;
 
-
-//All the elements//
+//Timer variables//
 var time = document.querySelector(".time");
 var seconds = document.getElementById("seconds");
-
 var timeLeft = 30;
 
 function setTime() {
@@ -34,6 +32,8 @@ function setTime() {
 function sendMessage() {
     time.textContent = "GAME OVER";
 }
+
+
 
 setTime();
 
@@ -133,7 +133,7 @@ var allQuestions = [
    }, 
    ]
 
-   console.log(allQuestions);
+
 
 
 //questions variables//
@@ -178,11 +178,10 @@ function userAnswer (choice) {
         runningIndexQ++;
         renderQuestion()
     }
+
     result.style.display = "block"; 
 
 }
-
-
 
 //correct answer function
 function correctAnswer() {
@@ -208,6 +207,7 @@ function finalScore() {
     question.textContent = "FINISHED!";
     seconds.textContent = secondsLeft;
 }
+
 
 //Set a variable for user's answer
 
@@ -235,6 +235,8 @@ choiceD.addEventListener("click", function(event){
     userAnswer(dataIndex);
 
 })
+
+//Function to Stop the Game//
 
 
 
